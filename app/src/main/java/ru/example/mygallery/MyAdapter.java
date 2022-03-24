@@ -21,8 +21,8 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
-    private ArrayList<Cell> galleryList;
-    private Context context;
+    private final ArrayList<Cell> galleryList;
+    private final Context context;
     String paths;
     public ImageView img;
     Animation animation;
@@ -52,25 +52,20 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         // - replace the contents of the view with that element
         viewHolder.img.setScaleType(ImageView.ScaleType.CENTER_CROP);
         setImageFromPath(galleryList.get(position).getPath(), viewHolder.img);
-        viewHolder.img.setOnClickListener( new View.OnClickListener() {
-
-
-            @Override
-            public void onClick(View v) {
-                img = v.findViewById(R.id.img);
-                animation = AnimationUtils.loadAnimation(v.getContext(), R.anim.rotate);
-                img.startAnimation(animation);
-                Intent intent = new Intent(v.getContext(), ImageActivity.class);
-                intent.putExtra("Index", position);
-                intent.putExtra("Image", galleryList.get(position).getPath());
-                intent.putExtra("FirstImage", galleryList.get(0).getPath());
-                intent.putExtra("Paths", paths);
-                v.getContext().startActivity(intent);
-            }
-
-
+        viewHolder.img.setOnClickListener(v -> {
+            img = v.findViewById(R.id.img);
+            animation = AnimationUtils.loadAnimation(v.getContext(), R.anim.rotate);
+            img.startAnimation(animation);
+            Intent intent = new Intent(v.getContext(), ImageActivity.class);
+            intent.putExtra("Index", position);
+            intent.putExtra("Image", galleryList.get(position).getPath());
+            intent.putExtra("FirstImage", galleryList.get(0).getPath());
+            intent.putExtra("Paths", paths);
+            v.getContext().startActivity(intent);
         });
     }
+
+
 
 
     // Provide a reference to the views for each data item
@@ -92,7 +87,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public int getItemCount() {
         return galleryList.size();
     }
-
+    public Context getContext() {return context;}
     private void setImageFromPath(String path, ImageView image) {
         File imgFile = new File(path);
         if (imgFile.exists()) {

@@ -10,7 +10,6 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -42,31 +41,30 @@ public class MainActivity extends AppCompatActivity {
                 MediaStore.Images.Media.BUCKET_DISPLAY_NAME, MediaStore.Images.Media.BUCKET_ID};
         Cursor cursor = this.getContentResolver().query(allImagesuri, projection, null, null, null);
         try {
-            int count = 0;
             allFiles = new ArrayList<>();
             if (cursor != null) {
                 cursor.moveToLast();
             }
             do {
                 Cell path = new Cell();
+                assert cursor != null;
                 path.setTitle(cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DISPLAY_NAME)));
                 path.setPath(cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)));
-                count++;
                 allFiles.add(path);
 
             }
-            while (cursor.moveToPrevious() && count < 102);
+            while (cursor.moveToPrevious());
             cursor.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
         for (int i = 0; i < allFiles.size(); i++) {
-            allFilesPaths = allFilesPaths + allFiles.get(i).getPath() + "#";
+            allFilesPaths = String.format("%s%s", allFilesPaths, String.format("%s#", allFiles.get(i).getPath()));
 
             Log.d("picture folders", allFiles.get(i).getTitle() + " and path = " + allFiles.get(i).getPath());
         }
         Log.d("picture folders", allFilesPaths );
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.gallery);
+        RecyclerView recyclerView = findViewById(R.id.gallery);
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setHasFixedSize(true);
         // список в три колонки
