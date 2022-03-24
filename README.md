@@ -14,9 +14,7 @@
 ## Создано с помощью
 ![Software](https://github.com/Pasteger/OnceByTheCampfire/blob/master/softvare.png)
 
-* IntelliJIdea
 * Android Studio
-* Adobe Photoshop
 * GitHub
 * Discord
 * Yandex
