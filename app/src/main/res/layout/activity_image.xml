@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ImageActivity"
+    android:background="@drawable/background"
+    >
+
+    <ImageView
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ImageOnClick"
+        />
+
+    <Button
+        android:background="@drawable/button"
+        android:id="@+id/LeftButton"
+        android:layout_width="@dimen/heightWidthButton"
+        android:layout_height="@dimen/heightWidthButton"
+        android:paddingBottom="@dimen/paddingBottomButton"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/marginLeftRightButton"
+        android:text="@string/LeftArrow"
+        android:textColor="@color/buttonColor"
+        android:onClick="LeftButtonClick"
+        android:textSize="@dimen/textSizeButton"
+        tools:ignore="OnClick" />
+
+    <Button
+        android:id="@+id/RightButton"
+        android:layout_width="@dimen/heightWidthButton"
+        android:layout_height="@dimen/heightWidthButton"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/marginLeftRightButton"
+        android:background="@drawable/button"
+        android:onClick="RightButtonClick"
+        android:paddingBottom="@dimen/paddingBottomButton"
+        android:text="@string/RightArrow"
+        android:textColor="@color/buttonColor"
+        android:textSize="@dimen/textSizeButton"
+        tools:ignore="OnClick" />
+
+</RelativeLayout>
